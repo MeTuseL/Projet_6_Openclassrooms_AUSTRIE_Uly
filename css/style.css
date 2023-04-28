@@ -32,7 +32,7 @@ a {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin: 100px 0px 100px 0px;
 }
 
 .photographer_section article {
@@ -41,30 +41,54 @@ a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-radius: 20px;
+    transition: all 0.2s;
 }
-
+.photographer_section article:hover {
+    border-top: 3px solid #901C1C;
+    border-bottom: 3px solid #901C1C;
+} 
+.photographer_section article a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
     margin-bottom: 0px;
 }
-
-.photographer_section article img {
+.image-photographer {
+    position: relative;
     height: 200px;
     width: 200px;
-    object-fit: cover;
     border-radius: 100px;
+    overflow: hidden;
+    background-color: rgb(220, 217, 217);
 }
-
-.photographer_section article img:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: 0.3s;
+.photographer_section article img {
+    position: absolute;
+    height: 110%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease-out;
+    bottom: -5px;
+}
+.photographer_section article:hover img {
+    /* object-position: 50% 70% */
+    bottom: 0px;
 }
 
 .description-photographer-1 {
     color: #D3573C;
 }
-
+.photographer_section article:hover h2 {
+    text-decoration: underline #D3573C;
+} 
 .description-photographer-2 {
     font-size: 13px;
 }
