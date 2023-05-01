@@ -1,12 +1,12 @@
 fetch('data/photographers.json')
     .then(reponse => reponse.json())
     .then(data => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const idPhotographer = urlParams.get('id');
+
         async function getPhotographers() {
-            //   Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
-            //   mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const idPhotographer = urlParams.get('id');
+
             let listPhotographers = data["photographers"];
             let photographer = new Array();
 
@@ -21,39 +21,53 @@ fetch('data/photographers.json')
                 photographer: photographer
             });
         }
-        async function getMediasPhotographers() {
+        async function getMediasPhotographer() {
 
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const idPhotographer = urlParams.get('id');
             let listMedias = data["media"];
-            let media = new Array();
+            let medias = new Array();
 
-            for (let i in listMedias) {
-                if (idPhotographer == listMedias[i]["photographerId"]) {
-                    media.push(listMedias[i]);
+            for (let media of listMedias) {
+                if (idPhotographer == media["photographerId"]) {
+                    medias.push(media);
 
                 }
             }
-console.log(media);
+
             return ({//   et bien retourner le tableau du photographe seulement une fois récupéré
-                media: media
+                medias: medias
             });
         }
-        console.log(getMediasPhotographers());
-        async function displayData(photographer) {
-            const photographersHeader = document.getElementById("main");
 
-                const photographerModel = photographerFactory(photographer);
-                const userCardDOM = photographerModel.getUserProfileDOM();
-                photographersHeader.appendChild(userCardDOM);
+        async function displayData(photographer) {
+
+            //header data
+            const photographerProfile = document.getElementById("aside");
+
+            const photographerModel = photographerFactory(photographer);
+            const userCardDOM = photographerModel.getUserProfileDOM();
+            photographerProfile.appendChild(userCardDOM);
+
             
+
+        }
+        async function displayMediasData(medias,namePhotographer) {
+            const photographerProfile = document.getElementById("section");
+            //Media data 
+            medias.forEach((media) => {
+                const mediaModel = mediaFactory(media,namePhotographer);
+                const listDomMedias = mediaModel.getListDOM();
+                photographerProfile.appendChild(listDomMedias);
+            });
         }
 
+    
         async function init() {
             //   Récupère les datas du photographe
             const { photographer } = await getPhotographers();
             displayData(photographer);
+         
+            const { medias } = await getMediasPhotographer();
+            displayMediasData(medias,photographer["name"]);
         }
 
         init();

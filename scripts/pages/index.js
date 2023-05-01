@@ -26,7 +26,7 @@ fetch('data/photographers.json')
             //         "portrait": "account.png"
             //     },
             // ]
-        
+    
             return ({ // et bien retourner le tableau photographers seulement une fois récupéré
                 photographers: listPhotographers
             });

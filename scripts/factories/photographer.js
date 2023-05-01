@@ -3,6 +3,7 @@ function photographerFactory(data) {
 
     const picture = `assets/photographers/${portrait}`;
     const pagePhotographer = `photographer.html?id=${id}`;
+    const iconLike = `assets/icons/heart-solid.svg`;
     
     function getUserCardDOM() {// user card info
         // article
@@ -32,6 +33,7 @@ function photographerFactory(data) {
         const p_3 = document.createElement('p');
         p_3.className = "description-photographer-3";
         p_3.textContent = price + '€/jour';
+        
         // add node
         article.appendChild(a);
         a.appendChild(div_img)
@@ -67,15 +69,12 @@ function photographerFactory(data) {
         img.setAttribute("src", picture);
         img.setAttribute("alt", 'Photo de ' + name)
 
-        // //button
-        // const button = document.createElement('button');
-        // button.className = "contact_button1";
-        // button.textContent = "Contacter "+name;
-        // div_section.appendChild(button);
-
-        //price and like photograph*
+        //price and like photograph
+        const img_icon = document.createElement('img');
+        img_icon.setAttribute("src",iconLike);
+        img_icon.setAttribute("alt","J'aime");
         const div_price_like = document.createElement("div");
-        div_price_like.className = "container-price-allLike";
+        div_price_like.className = "container-price-popularity";
         const span_price = document.createElement('span');
         span_price.textContent = price + '€/jour';
         // add node 
@@ -86,10 +85,12 @@ function photographerFactory(data) {
         div_img.appendChild(img);
         paragraphHeader.append(div_img);
 
-        div_price_like.appendChild(span_price);
         main.appendChild(div_price_like);
+        div_price_like.appendChild(img_icon);
+        div_price_like.appendChild(span_price);
 
         return (paragraphHeader);
     }
     return { name, picture, getUserCardDOM, getUserProfileDOM };
 }
+
