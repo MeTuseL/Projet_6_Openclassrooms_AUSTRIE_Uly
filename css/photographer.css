@@ -1,13 +1,59 @@
 #contact_modal {
     display: none;
 }
-
+#main {
+    position: relative;
+    margin: 0 50px 0 50px;
+}
+.container-price-allLike{
+    position: fixed;
+    right: 35px;
+    bottom: 0;
+    background-color: #D3573C;
+    padding: 15px;
+}
+.container-price-allLike span {
+    font-weight: bold;
+}
 .photograph-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 0 50px 0 50px;
+}
+.image-photographer:hover img {
+    bottom: 0px;
+}
+.container-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+.container-description h2 {
+    color: #D3573C;
+    font-size: 60px;
+    margin: 0px;
+}
+.container-description .description-photographer-1 {
+    color: #901C1C;
+    font-size: 25px;
 }
 
+.container-description .description-photographer-2 {
+    font-size: 20px;
+}
+
+.container-description .description-photographer-1,
+.container-description .description-photographer-2
+ {
+    margin: 1px;
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;
