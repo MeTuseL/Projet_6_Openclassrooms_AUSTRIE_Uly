@@ -47,27 +47,59 @@ fetch('data/photographers.json')
             const userCardDOM = photographerModel.getUserProfileDOM();
             photographerProfile.appendChild(userCardDOM);
 
-            
+
 
         }
-        async function displayMediasData(medias,namePhotographer) {
+        async function displayMediasData(medias, namePhotographer) {
             const photographerProfile = document.getElementById("section");
             //Media data 
             medias.forEach((media) => {
-                const mediaModel = mediaFactory(media,namePhotographer);
+                const mediaModel = mediaFactory(media, namePhotographer);
                 const listDomMedias = mediaModel.getListDOM();
                 photographerProfile.appendChild(listDomMedias);
             });
+            //events media video
+            const iconVideo = document.querySelectorAll(".icon-play-media");
+            const video = document.querySelectorAll(".video-media");
+            
+            iconVideo.forEach((icon,index) => icon.addEventListener("click", () => {
+                video[index].play().then(() => {
+                    icon.style.display = "none";
+                    video[index].setAttribute("controls", "");
+                    video[index].style.filter = "blur(0)";
+                });
+            }));
+           
+            video.forEach((vid,index) => vid.addEventListener("ended", () => {
+                
+                if (document.fullscreenElement) {
+                    setTimeout(() => {
+                        document.exitFullscreen();
+                        iconVideo[index].style.display = "block";
+                        vid.removeAttribute("controls");
+                        vid.style.filter = "blur(2px)";
+                    },5000);
+                    
+                }
+                else{
+                    setTimeout(() => {
+                    iconVideo[index].style.display = "block";
+                    vid.removeAttribute("controls");
+                    vid.style.filter = "blur(2px)";
+                },2000); 
+            }                  
+            }));
+
         }
 
-    
+
         async function init() {
             //   Récupère les datas du photographe
             const { photographer } = await getPhotographers();
             displayData(photographer);
-         
+
             const { medias } = await getMediasPhotographer();
-            displayMediasData(medias,photographer["name"]);
+            displayMediasData(medias, photographer["name"]);
         }
 
         init();
