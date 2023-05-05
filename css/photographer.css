@@ -6,10 +6,6 @@ li {
     list-style: none;
 }
 
-#main {
-    position: relative;
-    margin: 0 100px;
-}
 /* popularity photograph */
 .container-price-popularity{
     position: fixed;
@@ -75,6 +71,7 @@ li {
 /* section */
 #section {
     margin-top: 50px;
+    margin: 100px 20px;
 }
 .container-dropdownList label {
     font-weight: bold;
@@ -153,6 +150,7 @@ li {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
     
 }
 .title-media h2 {
@@ -177,7 +175,8 @@ li {
     width: 20px;
 }
 /* modal */
-.contact_button {
+.contact_button,
+.contact_submit {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -190,7 +189,8 @@ li {
     cursor: pointer;
     transition: all 0.2s;
 }
-.contact_button:hover, .contact_button:active{
+.contact_button:hover, .contact_button:active,
+.contact_submit:hover,.contact_submit:active {
     background-color: #DB8876;
     color: black;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -201,61 +201,177 @@ li {
     z-index: 1;
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, hsl(300, 40%, 20%),hsl(300, 40%, 5%));
+    background: radial-gradient(black, transparent);
+    left: 0;
+    top: 0;
+    overflow: auto;
 }
 .modal {
-    position: absolute;
+    position: relative;
     border-radius: 5px;
     background-color: #DB8876;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
     align-items: center;
-    justify-content: space-between;
     padding: 35px;
+    margin: 50px auto;
+    overflow: hidden;
+    max-width: 550px;
+    animation: modalopenY 0.8s;
     
 }
-
-.modal header {
+@keyframes modalopenY {
+    from {
+      opacity: 0;
+      transform: translateY(-150px);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes modalopenX {
+    from {
+      opacity: 0;
+      transform: translateX(-150px);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+#header-contact {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
+.container-title-contact {
     display: flex;
-    width: 100%;
     flex-direction: column;
+    flex-wrap: nowrap;
+    
+}
+.container-title-contact h2 {
+    font-size: 40px;
+    font-weight: 500;
+
+}
+.container-icon-close{
+    display: flex;
     align-items: flex-start;
+    height: 100%;
 }
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
+.icon-close{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
-
-form div {
-    display: flex;
-    flex-direction: column;
+/* form modal */
+form[name="form-modal"] {
+    
     width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+
 }
 
-form input {
+
+form[name="form-modal"] label {
+    color: #312E2E;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+form[name="form-modal"] .formData {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form[name="form-modal"] .text-control {
     width: 100%;
     height: 68px;
     border: none;
+    outline: none;
     border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    outline: 3px solid;
+    outline-color: transparent;
+    transition: all 0.2s;
+
 }
+form[name="form-modal"] .text-control:focus{
+    outline-color:black
+}
+form[name="form-modal"] #your-message {
+    resize: none;
+    height: 120px;
+    border-bottom: 20px solid;
+    border-bottom-color: transparent;
+    font-size: 15px;
+}
+
+
+#count-character{
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #D3573C;    
+}
+.modal-registration-validated{
+    display: none;
+    animation: modalopenX 0.8s;
+    text-align: center;
+    
+}
+
+.confirm-modal{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    height: 200px;
+
+}
+
+form[name="form-modal"] .contact_button,
+form[name="form-modal"] .contact_submit {
+    font-size: 15px;
+    width: 140px;
+    height: 60px;
+}
+
+/* data error message */
+.formData[data-error]::after {
+    position: absolute;
+    right: 0;
+    content: attr(data-error);
+    color: black;
+    display: block;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: 0.3s;
+    font-weight: 600;
+  }
+  
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  
+  .formData[data-error-visible="true"] .text-control {
+    outline: 3px solid #901C1C;
+  }
+  
+  .formData[data-correct="true"] .text-control {
+    outline: 3px solid #279e7a;
+  }

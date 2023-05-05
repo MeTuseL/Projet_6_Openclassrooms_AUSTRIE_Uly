@@ -10,50 +10,75 @@
 </head>
 
 <body>
-  <header>
-    <a href="index.html">
-      <img src="assets/images/logo.png" alt="Fisheye Home page" class="logo" />
-    </a>
-  </header>
-  <main id="main">
-    <aside id="aside">
-      <div class="photograph-header">
-        <button class="contact_button" aria-label="Contactez-moi, ouvrir">Contactez-moi</button>
+  <div class="container-body">
+    <header>
+      <div class="container-header">
+        <a href="index.html">
+          <img src="assets/images/logo.png" alt="Fisheye Home page" class="logo" />
+        </a>
       </div>
-    </aside>
-    <section id="section">
-      <div class="container-dropdownList">
-        <label for="dropdownList">Trier par</label>
-        <select id="dropdownList">
-          <option>Popularité</option>
-          <option>Date</option>
-          <option>Titre</option>
-        </select>
-      </div>
-      <ul class="list-medias">
-      </ul>
-    </section>
-  </main>
-  <div id="contact_modal">
-    <div class="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <img class="icon-close" src="assets/icons/close.svg" aria-label="Fermer" />
-      </header>
-      <form>
-        <div>
-          <label>Prénom</label>
-          <input />
+    </header>
+    <main id="main">
+      <aside id="aside">
+        <div class="photograph-header">
+          <button class="contact_button" aria-label="Contactez-moi, ouvrir">Contactez-moi</button>
         </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
+      </aside>
+      <section id="section">
+        <div class="container-dropdownList">
+          <label for="dropdownList">Trier par</label>
+          <select id="dropdownList">
+            <option>Popularité</option>
+            <option>Date</option>
+            <option>Titre</option>
+          </select>
+        </div>
+        <ul class="list-medias">
+        </ul>
+      </section>
+    </main>
+    <div id="contact_modal">
+      <div class="modal">
+        <header id="header-contact">
+          <h2>Contactez-moi</h2>
+          <div class="container-icon-close">
+            <img class="icon-close" src="assets/icons/close.svg" aria-label="Fermer" />
+          </div>
+        </header>
+        <form name="form-modal" action="photographer.html?id=930" method="post">
+          
+            <div class="formData">
+              <label for="first">Prénom</label>
+              <input class="text-control" type="text" id="first" name="first"><br>
+            </div>
+            <div class="formData">
+              <label for="last">Nom</label>
+              <input class="text-control" type="text" id="last" name="last"><br>
+            </div>
+            <div class="formData">
+              <label for="email">Email</label>
+              <input class="text-control" type="text" id="email" name="email"><br>
+            </div>
+            <div class="formData">
+              <label for="your-message">Votre message</label>
+              <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message">
+          </textarea><br>
+              <span id="count-character">500 caractères maximum</span>
+            </div>
+            <input class="contact_submit" type="submit" value="Envoyer">
+        </form>
+        <div class="modal-registration-validated">
+          <p class="confirm-modal">Message envoyé !</p>
+          <button class="contact_button btn-close">Fermer</button>
+        </div>
+      </div>
     </div>
   </div>
-
   <script src="scripts/factories/photographer.js" defer></script>
   <script src="scripts/factories/media.js" defer></script>
   <script src="/scripts/pages/photographer.js" defer></script>
   <script src="/scripts/utils/contactForm.js" defer></script>
+  <script src="scripts/factories/infosUserForm.js"></script>
 </body>
 
 </html>

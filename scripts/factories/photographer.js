@@ -4,8 +4,8 @@ function photographerFactory(data) {
     const picture = `assets/photographers/${portrait}`;
     const pagePhotographer = `photographer.html?id=${id}`;
     const iconLike = `assets/icons/heart-solid.svg`;
-    
-    function getUserCardDOM() {// user card info
+
+    function getUserCardDOM() {// user card info Homepage
         // article
         const article = document.createElement('article');
         article.ariaLabel = 'Mini-profil du photographe ' + name;
@@ -33,7 +33,7 @@ function photographerFactory(data) {
         const p_3 = document.createElement('p');
         p_3.className = "description-photographer-3";
         p_3.textContent = price + '€/jour';
-        
+
         // add node
         article.appendChild(a);
         a.appendChild(div_img)
@@ -45,7 +45,7 @@ function photographerFactory(data) {
 
         return (article);
     }
-    function getUserProfileDOM() {// user profile info
+    function getUserProfileDOM() {// user page profile info
         //main
         const main = document.getElementById("main");
         //photograph  profile 
@@ -69,14 +69,22 @@ function photographerFactory(data) {
         img.setAttribute("src", picture);
         img.setAttribute("alt", 'Photo de ' + name)
 
-        //price and like photograph
+        //price and like photographer
         const img_icon = document.createElement('img');
-        img_icon.setAttribute("src",iconLike);
-        img_icon.setAttribute("alt","J'aime");
+        img_icon.setAttribute("src", iconLike);
+        img_icon.setAttribute("alt", "J'aime");
         const div_price_like = document.createElement("div");
         div_price_like.className = "container-price-popularity";
         const span_price = document.createElement('span');
         span_price.textContent = price + '€/jour';
+        //contact photographer
+        const headerContact = document.querySelector('#header-contact');
+        const titlehHeaderContact = document.querySelector('#header-contact h2');
+        const div_contact_header = document.createElement('div');
+        div_contact_header.className = "container-title-contact";
+        const nameContact = document.createElement('h2');
+        nameContact.textContent = name;
+       
         // add node 
         div_description.appendChild(h2);
         div_description.appendChild(p_1);
@@ -88,6 +96,10 @@ function photographerFactory(data) {
         main.appendChild(div_price_like);
         div_price_like.appendChild(img_icon);
         div_price_like.appendChild(span_price);
+
+        headerContact.prepend(div_contact_header);
+        div_contact_header.appendChild(titlehHeaderContact);
+        div_contact_header.appendChild(nameContact);
 
         return (paragraphHeader);
     }
