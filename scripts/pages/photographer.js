@@ -58,61 +58,164 @@ fetch('data/photographers.json')
                 const listDomMedias = mediaModel.getListDOM();
                 photographerProfile.appendChild(listDomMedias);
             });
-            //events media video
-            const iconVideo = document.querySelectorAll(".icon-play-media");
-            const video = document.querySelectorAll(".video-media");
+            //Events media video
+            const iconsPlayVideo = document.querySelectorAll(".icon-play-media");
+            const videos = document.querySelectorAll(".video-media");
 
-            iconVideo.forEach((icon, index) => icon.addEventListener("click", () => {
-                video[index].play().then(() => {
+            iconsPlayVideo.forEach((icon, index) => icon.addEventListener("click", () => {
+                videos[index].play().then(() => {
                     icon.style.display = "none";
-                    video[index].setAttribute("controls", "");
-                    video[index].style.filter = "blur(0)";
+                    videos[index].setAttribute("controls", "");
+                    videos[index].style.filter = "blur(0)";
                 });
             }));
 
-            video.forEach((vid, index) => vid.addEventListener("pause", () => {
+            videos.forEach((video, index) => video.addEventListener("pause", () => {
 
                 //The video returns to its display by default, 
                 // after 5 seconds it is finished (without the user wanting to read it again)
-                    if (vid.currentTime == vid.duration
-                        && vid.ended) {
-                        setTimeout(() => {
-                            breakme: if (vid.currentTime !== vid.duration
-                                && !vid.ended) {
+                if (video.currentTime == video.duration
+                    && video.ended) {
+                    setTimeout(() => {
+                        breakme: if (video.currentTime !== video.duration
+                            && !video.ended) {
 
-                                break breakme;
+                            break breakme;
+                        }
+                        else {
+                            if (document.fullscreenElement) {
+                                document.exitFullscreen();
                             }
-                            else {
-                                if(document.fullscreenElement){
-                                    document.exitFullscreen();
-                                }
-                                iconVideo[index].style.display = "block";
-                                vid.removeAttribute("controls");
-                                vid.style.filter = "blur(2px)";
+                            iconsPlayVideo[index].style.display = "block";
+                            video.removeAttribute("controls");
+                            video.style.filter = "blur(2px)";
+                        }
+                    }, 5000);
+                }
+                //The video returns to its display by default, 
+                // after 15 seconds it is paused (without the user wanting to read it again)
+                if (video.paused) {
+                    setTimeout(() => {
+                        breakme: if (!video.paused) {
+
+                            break breakme;
+                        }
+                        else {
+                            if (document.fullscreenElement) {
+                                document.exitFullscreen();
                             }
-                        }, 5000);
-                    }
-                    //The video returns to its display by default, 
-                    // after 15 seconds it is paused (without the user wanting to read it again)
-                    if(vid.paused){
-                            setTimeout(() => {
-                                breakme: if (!vid.paused) {
-    
-                                    break breakme;
-                                }
-                                else {
-                                    if(document.fullscreenElement){
-                                        document.exitFullscreen();
-                                    }
-                                    iconVideo[index].style.display = "block";
-                                    vid.removeAttribute("controls");
-                                    vid.style.filter = "blur(2px)";
-                                }
-                        },15000);
-                    }
-                
+                            iconsPlayVideo[index].style.display = "block";
+                            video.removeAttribute("controls");
+                            video.style.filter = "blur(2px)";
+                        }
+                    }, 15000);
+                }
+
 
             }));
+
+            // Events lightBox Media
+            const listMedias = document.querySelectorAll(".image-media");
+            const listMediasPicture = document.querySelectorAll(".media-picture");
+            const listLightBoxMedias = document.querySelectorAll(".lightBox-media-picture"); const listTitleMedia = document.querySelectorAll(".title-media");
+            const bgLightBoxModal = document.getElementById("lightBox-medias");
+            const iconsCloseLightBox = document.querySelector(".close-lightBox");
+            const prevIconsLightBox = document.querySelector(".prev-media");
+            const nextIconsLightBox = document.querySelector(".next-media");
+            let indexLightBox;
+            const arrayLightBoxMedias = Array.from(listLightBoxMedias);
+            const videosMedias = document.querySelectorAll(".media-picture video");
+            const videosMediasLightBox = document.querySelectorAll('.lightBox-video-media');
+            const iconsPlayVideoLightBox = document.querySelectorAll(".lightBox-media-picture .icon-play-media");
+
+
+            listMedias.forEach((media) => media.addEventListener("click", displayLightBox));
+            listTitleMedia.forEach((title) => title.addEventListener("click", displayLightBox));
+            videosMedias.forEach((video) => video.addEventListener("click", () => {
+                if (video.hasAttribute("controls") == false) {
+                    displayLightBox();
+                }
+            }));
+            iconsCloseLightBox.addEventListener("click", closeLightBox);
+            listMediasPicture.forEach((media, index) => media.addEventListener("click", () => {
+                currentSlide(index);
+
+            }));
+            prevIconsLightBox.addEventListener("click", () => {
+                for (let media of arrayLightBoxMedias) {
+                    if (media.style.display == "block") {
+                        indexLightBox = arrayLightBoxMedias.indexOf(media);
+                    }
+                }
+                prevSlides(indexLightBox);
+               pauseVideo();
+            });
+            nextIconsLightBox.addEventListener("click", () => {
+                for (let media of arrayLightBoxMedias) {
+                    if (media.style.display == "block") {
+                        indexLightBox = arrayLightBoxMedias.indexOf(media);
+                    }
+                }
+                nextSlides(indexLightBox);
+                pauseVideo();
+            });
+
+
+            function displayLightBox() {
+                bgLightBoxModal.style.display = "block";
+                body.style.overflow = "hidden";
+                main.style.opacity = "0.4";
+
+            }
+
+            function closeLightBox() {
+                bgLightBoxModal.style.display = "none";
+                body.style.overflow = "scroll";
+                main.style.opacity = "1";
+            }
+            function pauseVideo(){
+                videosMediasLightBox.forEach((video,indexVid) => {
+                    if(!video.paused){
+                        video.pause();
+                        iconsPlayVideoLightBox[indexVid].style.display = "block";
+                        video.removeAttribute("controls");
+                        video.style.filter = "blur(2px)";
+                    }
+
+                });
+            }
+            function showSlides(n) {
+
+                for (let i = 0; i < listLightBoxMedias.length; i++) {
+                    listLightBoxMedias[i].style.display = "none";
+                }
+                listLightBoxMedias[n].style.display = "block"
+            }
+
+            function nextSlides(n) {
+                if (n == (listLightBoxMedias.length - 1)) {
+                    n = 0;
+                    showSlides(n)
+                }
+                else {
+                    showSlides((n + 1));
+                }
+            }
+            function prevSlides(n) {
+                if (n == 0) {
+                    n = (listLightBoxMedias.length - 1);
+                    showSlides(n);
+                }
+                else {
+                    showSlides((n - 1));
+                }
+            }
+
+            function currentSlide(n) {
+                showSlides(n);
+
+            }
+
 
         }
 

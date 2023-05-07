@@ -1,6 +1,7 @@
 //DOM Modal
 const body = document.querySelector("body");
-const contactModal = document.getElementById("contact_modal");
+const main = document.getElementById('main');
+const bgModal = document.getElementById("contact-modal");
 const modal = document.querySelector('form[name="form-modal"]');
 const contactBtn = document.querySelector(".contact_button");
 const closeForm = document.querySelector(".icon-close");
@@ -53,7 +54,8 @@ message.addEventListener("input", validateValues);
 function displayModal() {
     modal.style.display = "block";
     body.style.overflow = "hidden";
-    contactModal.style.display = "block";
+    bgModal.style.display = "block";
+    main.style.opacity = "0.4";
 }
 function closeModal() {
     modal.reset();
@@ -64,8 +66,9 @@ function closeModal() {
     });
     modal.style.display = "none";
     body.style.overflow = "scroll";
-    contactModal.style.display = "none";
+    bgModal.style.display = "none";
     modalRegistValid.style.display = "none";
+    main.style.opacity = "1";
 }
 function controlName(name) {// control name form
     return reName.test(name.value);
