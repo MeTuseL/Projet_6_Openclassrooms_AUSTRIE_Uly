@@ -139,6 +139,7 @@ li {
     object-fit: cover;
     transition: all 0.5s ease-out;
     bottom: -5px;
+    cursor: pointer;
 }
 .card-media-photographer:hover .image-media,
 .card-media-photographer:hover .video-media {
@@ -156,6 +157,7 @@ li {
 .title-media h2 {
     color: #901C1C;
     font-size: 20px;
+    cursor: pointer;
     
 }
 .count-like-media {
@@ -412,6 +414,10 @@ form[name="form-modal"] .contact_submit {
     filter: invert(11%) sepia(94%) saturate(3370%) hue-rotate(354deg) brightness(89%) contrast(85%);
     z-index: 1;
     margin-top: 30px;
+  }
+  .prev-media:hover,.next-media:hover{
+transform: scale(1.2);
+transition: all 0.5s;
   }
   .lightBox-media-picture {
     position: relative;

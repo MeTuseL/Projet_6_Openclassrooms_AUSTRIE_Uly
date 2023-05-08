@@ -1,18 +1,12 @@
 function mediaFactory(dataMedia, namePhotographer) {
 
     const {id, photographerId, title, image, video, likes, date, price } = dataMedia;
-    
-    // const {name} = photographers.find(photographer => photographer.id == photographerId);
     const nameFilePhotographer = namePhotographer.substring(0, namePhotographer.indexOf(' '));
     const picture = `assets/medias/${nameFilePhotographer}/${image || video}`;
     const iconLike = `assets/icons/heart-solid.svg`;
     const iconPlay = `assets/icons/play-solid.svg`;
-    const iconClose = `assets/icons/close.svg`;
 
-    function getListDOM() {
-        
-        
-        //list medias
+    function getListDOM() {// list medias
         const ulMedias = document.querySelector('.list-medias');
         ulMedias.ariaLabel = "Liste des medias de "+namePhotographer;
         const contentMedia = document.createElement('li');

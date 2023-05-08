@@ -1,44 +1,40 @@
 fetch('data/photographers.json')
     .then(reponse => reponse.json())
     .then(data => {
+        // get url id of photographer
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const idPhotographer = urlParams.get('id');
 
-        async function getPhotographers() {
+        async function getPhotographers() {// return photographer 
 
             let listPhotographers = data["photographers"];
             let photographer = new Array();
 
-            for (let i in listPhotographers) {
-                if (idPhotographer == listPhotographers[i]["id"]) {
-                    photographer = listPhotographers[i];
+            listPhotographers.find(phgrapher => {
+                if (idPhotographer == phgrapher["id"]) {
+                    photographer = phgrapher;
 
                 }
-            }
-
-            return ({//   et bien retourner le tableau du photographe seulement une fois récupéré
-                photographer: photographer
             });
+
+            return ({photographer: photographer});
         }
-        async function getMediasPhotographer() {
+        async function getMediasPhotographer() {// return media list of photographer 
 
             let listMedias = data["media"];
             let medias = new Array();
 
-            for (let media of listMedias) {
-                if (idPhotographer == media["photographerId"]) {
-                    medias.push(media);
+            listMedias.find(picture => {
+                if (idPhotographer == picture["photographerId"]) {
+                    medias.push(picture);
 
                 }
-            }
-
-            return ({//   et bien retourner le tableau du photographe seulement une fois récupéré
-                medias: medias
             });
-        }
 
-        async function displayData(photographer) {
+            return ({medias: medias});
+        }
+        async function displayData(photographer) {//display data photographer
 
             //header data
             const photographerProfile = document.getElementById("aside");
@@ -50,7 +46,7 @@ fetch('data/photographers.json')
 
 
         }
-        async function displayMediasData(medias, namePhotographer) {
+        async function displayMediasData(medias, namePhotographer) {// display data medias photographer
             const photographerProfile = document.getElementById("section");
             //Media data 
             medias.forEach((media) => {
@@ -68,7 +64,7 @@ fetch('data/photographers.json')
                     videos[index].setAttribute("controls", "");
                     videos[index].style.filter = "blur(0)";
                 });
-            }));
+            }));// run video event
 
             videos.forEach((video, index) => video.addEventListener("pause", () => {
 
@@ -112,12 +108,13 @@ fetch('data/photographers.json')
                 }
 
 
-            }));
+            }));// pause video event
 
             // Events lightBox Media
             const listMedias = document.querySelectorAll(".image-media");
             const listMediasPicture = document.querySelectorAll(".media-picture");
-            const listLightBoxMedias = document.querySelectorAll(".lightBox-media-picture"); const listTitleMedia = document.querySelectorAll(".title-media");
+            const listLightBoxMedias = document.querySelectorAll(".lightBox-media-picture");
+            const listTitleMedia = document.querySelectorAll(".title-media h2");
             const bgLightBoxModal = document.getElementById("lightBox-medias");
             const iconsCloseLightBox = document.querySelector(".close-lightBox");
             const prevIconsLightBox = document.querySelector(".prev-media");
@@ -129,53 +126,55 @@ fetch('data/photographers.json')
             const iconsPlayVideoLightBox = document.querySelectorAll(".lightBox-media-picture .icon-play-media");
 
 
-            listMedias.forEach((media) => media.addEventListener("click", displayLightBox));
-            listTitleMedia.forEach((title) => title.addEventListener("click", displayLightBox));
+            listMedias.forEach((media) => media.addEventListener("click", displayLightBox));//open lightbox
+            listTitleMedia.forEach((title) => title.addEventListener("click", displayLightBox));//open lightbox
             videosMedias.forEach((video) => video.addEventListener("click", () => {
                 if (video.hasAttribute("controls") == false) {
                     displayLightBox();
                 }
-            }));
-            iconsCloseLightBox.addEventListener("click", closeLightBox);
+            }));//open lightbox
+            iconsCloseLightBox.addEventListener("click", closeLightBox);// close lightBox
             listMediasPicture.forEach((media, index) => media.addEventListener("click", () => {
                 currentSlide(index);
 
-            }));
-            prevIconsLightBox.addEventListener("click", () => {
-                for (let media of arrayLightBoxMedias) {
-                    if (media.style.display == "block") {
-                        indexLightBox = arrayLightBoxMedias.indexOf(media);
-                    }
-                }
-                prevSlides(indexLightBox);
-               pauseVideo();
-            });
-            nextIconsLightBox.addEventListener("click", () => {
-                for (let media of arrayLightBoxMedias) {
-                    if (media.style.display == "block") {
-                        indexLightBox = arrayLightBoxMedias.indexOf(media);
-                    }
-                }
-                nextSlides(indexLightBox);
-                pauseVideo();
-            });
+            }));//open currant lightBox
+            listTitleMedia.forEach((title, index) => title.addEventListener("click", () => {
+                currentSlide(index);
 
+            }));//open current lightBox
+            prevIconsLightBox.addEventListener("click", prevSlidesLightBox);// switch media event
+            window.addEventListener("keydown", (event) => {
+                if (event.code === "ArrowLeft" &&
+                    bgLightBoxModal.style.display == "block") {
+                    prevSlidesLightBox();
+                }
+                else if (event.code === "ArrowRight" &&
+                    bgLightBoxModal.style.display == "block") {
+                    nextSlidesLightBox();
+                }
+                else if (event.code === "Escape" &&
+                    bgLightBoxModal.style.display == "block") {
+                    closeLightBox();
 
-            function displayLightBox() {
+                }
+
+            });// switch or close lightBox on press keyboard
+            nextIconsLightBox.addEventListener("click", nextSlidesLightBox);// switch media event
+
+            function displayLightBox() {// display lightBox
                 bgLightBoxModal.style.display = "block";
                 body.style.overflow = "hidden";
                 main.style.opacity = "0.4";
 
             }
-
-            function closeLightBox() {
+            function closeLightBox() {// close lightBox
                 bgLightBoxModal.style.display = "none";
                 body.style.overflow = "scroll";
                 main.style.opacity = "1";
             }
-            function pauseVideo(){
-                videosMediasLightBox.forEach((video,indexVid) => {
-                    if(!video.paused){
+            function pauseVideo() {// check video playing
+                videosMediasLightBox.forEach((video, indexVid) => {
+                    if (!video.paused) {
                         video.pause();
                         iconsPlayVideoLightBox[indexVid].style.display = "block";
                         video.removeAttribute("controls");
@@ -184,15 +183,14 @@ fetch('data/photographers.json')
 
                 });
             }
-            function showSlides(n) {
+            function showSlides(n) {// show 'index' slide
 
                 for (let i = 0; i < listLightBoxMedias.length; i++) {
                     listLightBoxMedias[i].style.display = "none";
                 }
                 listLightBoxMedias[n].style.display = "block"
             }
-
-            function nextSlides(n) {
+            function nextSlides(n) {// next 'index' slide
                 if (n == (listLightBoxMedias.length - 1)) {
                     n = 0;
                     showSlides(n)
@@ -201,7 +199,7 @@ fetch('data/photographers.json')
                     showSlides((n + 1));
                 }
             }
-            function prevSlides(n) {
+            function prevSlides(n) {// prev 'index' slide
                 if (n == 0) {
                     n = (listLightBoxMedias.length - 1);
                     showSlides(n);
@@ -210,18 +208,31 @@ fetch('data/photographers.json')
                     showSlides((n - 1));
                 }
             }
-
-            function currentSlide(n) {
+            function prevSlidesLightBox() {// get index current slide then switch slide
+                for (let media of arrayLightBoxMedias) {
+                    if (media.style.display == "block") {
+                        indexLightBox = arrayLightBoxMedias.indexOf(media);
+                    }
+                }
+                prevSlides(indexLightBox);
+                pauseVideo();
+            }
+            function nextSlidesLightBox() {// get index current slide then switch slide
+                for (let media of arrayLightBoxMedias) {
+                    if (media.style.display == "block") {
+                        indexLightBox = arrayLightBoxMedias.indexOf(media);
+                    }
+                }
+                nextSlides(indexLightBox);
+                pauseVideo();
+            }
+            function currentSlide(n) {//current 'index' slide
                 showSlides(n);
 
             }
-
-
         }
-
-
-        async function init() {
-            //   Récupère les datas du photographe
+        async function init() { //get data form photographer and medias photographer
+            
             const { photographer } = await getPhotographers();
             displayData(photographer);
 

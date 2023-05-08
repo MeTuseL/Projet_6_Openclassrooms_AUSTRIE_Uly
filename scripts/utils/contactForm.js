@@ -42,22 +42,22 @@ let emailUser;
 let messageUser;
 
 //Events modal
-contactBtn.addEventListener("click", displayModal);
-closeForm.addEventListener("click", closeModal);
+contactBtn.addEventListener("click", displayModal);// btn display modal event
+closeForm.addEventListener("click", closeModal);// icon close modal event
 btnClose.addEventListener("click", closeModal);// button close modal event
-message.addEventListener("keyup", controlMsg);
+message.addEventListener("keyup", controlMsg);// control textarea message modal event
 modal.addEventListener("submit", validate);// validate modal event
-textControl.forEach((input) => input.addEventListener("change", validateValues));// text constrol input event
-message.addEventListener("input", validateValues);
+textControl.forEach((input) => input.addEventListener("change", validateValues));// text constrol change event
+message.addEventListener("input", validateValues);// message input event 
 
 //Functions
-function displayModal() {
+function displayModal() {// display modal
     modal.style.display = "block";
     body.style.overflow = "hidden";
     bgModal.style.display = "block";
     main.style.opacity = "0.4";
 }
-function closeModal() {
+function closeModal() {// close modal
     modal.reset();
     formData.forEach((data) => {
         delete data.dataset.error;
@@ -76,7 +76,7 @@ function controlName(name) {// control name form
 function controlEmail(email) {// control email form 
     return reEmail.test(email.value);
 }
-function controlMsg() {
+function controlMsg() {//control message
     message.value = message.value.substring(0, 500);
     const lengthMsg = message.value.length;
     const countMsg = (500 - lengthMsg);
@@ -258,7 +258,7 @@ function validate(event) {// validate modal form
         messageUser = validateMsg(dataErrorEmail)["messageUser"];
         const infosUser = infosUserForm(firstNameUser,lastNameUser,emailUser,messageUser);
         console.log(infosUser);
-        infosUser.textInfosUser();
+        infosUser.displayInfosUser();
 
         launchValidateModal();
     }

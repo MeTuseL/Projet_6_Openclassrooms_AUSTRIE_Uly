@@ -1,6 +1,5 @@
 function photographerFactory(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
-
     const picture = `assets/photographers/${portrait}`;
     const pagePhotographer = `photographer.html?id=${id}`;
     const iconLike = `assets/icons/heart-solid.svg`;

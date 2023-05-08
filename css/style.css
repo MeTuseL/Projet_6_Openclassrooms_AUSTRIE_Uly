@@ -25,7 +25,11 @@
 ::-webkit-scrollbar-button{
     height: 5px;
   }
-
+/* Link */
+a {
+    text-decoration: none;
+    color: black;
+}
 /* body */
 body {
     font-family: "DM Sans", sans-serif;
@@ -36,7 +40,7 @@ body {
     margin: auto;
     max-width: 1440px;
 }
-/* flex heading page */
+/* header */
 .container-header {
     display: flex;
     flex-direction: row;
@@ -46,27 +50,23 @@ body {
     height: 90px;
     margin: 0 20px;
 }
-/* title website */
+
 h1 {
     color: #901C1C;
 }
-/* Link */
-a {
-    text-decoration: none;
-    color: black;
-}
+
 /* Logo */
 .logo {
     height: 50px;
 }
-/* grid photographers homePage */
+/* list photographers homePage */
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin: 100px 0;
 }
-/* profil photographers HomePage */
+
 .photographer_section article {
     justify-self: center;
     display: flex;
@@ -115,7 +115,6 @@ a {
     bottom: -5px;
 }
 .photographer_section article:hover img {
-    /* object-position: 50% 70% */
     bottom: 0px;
 }
 
