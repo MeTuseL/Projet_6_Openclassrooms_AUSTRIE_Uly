@@ -2,7 +2,6 @@ function photographerFactory(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
     const picture = `assets/photographers/${portrait}`;
     const pagePhotographer = `photographer.html?id=${id}`;
-    const iconLike = `assets/icons/heart-solid.svg`;
 
     function getUserCardDOM() {// user card info Homepage
         // article
@@ -45,8 +44,7 @@ function photographerFactory(data) {
         return (article);
     }
     function getUserProfileDOM() {// user page profile info
-        //main
-        const main = document.getElementById("main");
+    
         //photograph  profile 
         const paragraphHeader = document.querySelector(".photograph-header");
         //description photographer
@@ -68,14 +66,11 @@ function photographerFactory(data) {
         img.setAttribute("src", picture);
         img.setAttribute("alt", 'Photo de ' + name)
 
-        //price and like photographer
-        const img_icon = document.createElement('img');
-        img_icon.setAttribute("src", iconLike);
-        img_icon.setAttribute("alt", "J'aime");
-        const div_price_like = document.createElement("div");
-        div_price_like.className = "container-price-popularity";
+        //price photographer
+        const likesAndPricePhotographer = document.querySelector(".container-price-popularity");
         const span_price = document.createElement('span');
         span_price.textContent = price + '€/jour';
+        likesAndPricePhotographer.appendChild(span_price);
         //contact photographer
         const headerContact = document.querySelector('#header-contact');
         const titlehHeaderContact = document.querySelector('#header-contact h2');
@@ -91,11 +86,7 @@ function photographerFactory(data) {
         paragraphHeader.prepend(div_description);
         div_img.appendChild(img);
         paragraphHeader.append(div_img);
-
-        main.appendChild(div_price_like);
-        div_price_like.appendChild(img_icon);
-        div_price_like.appendChild(span_price);
-
+    
         headerContact.prepend(div_contact_header);
         div_contact_header.appendChild(titlehHeaderContact);
         div_contact_header.appendChild(nameContact);

@@ -18,14 +18,20 @@ li {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
+    width: 200px;
 }
-.container-price-popularity img {
+.popularity-photographer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.popularity-photographer img {
     height: 15px;
     width: 15px;
+    margin-left: 5px;
 }
-.container-price-popularity span {
-    
+.container-price-popularity {
     font-weight: bold;
 }
 /* photograph header */
@@ -171,10 +177,38 @@ li {
     
 }
 .count-like-media img {
-    filter: invert(11%) sepia(94%) saturate(3370%) hue-rotate(354deg) brightness(89%) contrast(85%);
+    position: relative;
+    background: transparent;
+    filter: invert(11%) sepia(94%) saturate(3370%) hue-rotate(354deg) brightness(89%) contrast(85%); 
     margin-left: 15px;
     height: 20px;
     width: 20px;
+    cursor: pointer;
+   
+}
+.count-like-media::after {
+    position: absolute;
+    content: url("../assets/icons/heart-solid.svg");  
+    filter: invert(11%) sepia(94%) saturate(3370%) hue-rotate(354deg) brightness(89%) contrast(85%); 
+    opacity: var(--iconAfterOpacity,0);  
+    height: 20px;
+    width: 20px;
+    right: 0;
+    z-index: -1;
+    transition: all 0.4s;
+
+}
+.count-like-media:hover::after {
+    opacity: var(--iconHoverAfterOpacity,1);
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 /* modal */
 .contact_button,

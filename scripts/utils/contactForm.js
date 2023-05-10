@@ -55,7 +55,7 @@ function displayModal() {// display modal
     modal.style.display = "block";
     body.style.overflow = "hidden";
     bgModal.style.display = "block";
-    main.style.opacity = "0.4";
+    main.style.filter = "blur(2px)";
 }
 function closeModal() {// close modal
     modal.reset();
@@ -65,10 +65,10 @@ function closeModal() {// close modal
         delete data.dataset.errorVisible;
     });
     modal.style.display = "none";
-    body.style.overflow = "scroll";
+    body.style.overflow = "auto";
     bgModal.style.display = "none";
     modalRegistValid.style.display = "none";
-    main.style.opacity = "1";
+    main.style.filter = "blur(0)";
 }
 function controlName(name) {// control name form
     return reName.test(name.value);
