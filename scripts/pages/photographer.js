@@ -50,9 +50,9 @@ fetch('data/photographers.json')
             const photographerProfile = document.getElementById("section");
             //Media data 
             medias.forEach((media) => {
-                const mediaModel = mediaFactory(media, namePhotographer);
-                const listDomMedias = mediaModel.getListDOM();
-                photographerProfile.appendChild(listDomMedias);
+                 const mediaModel = mediaFactory(media, namePhotographer);
+                 const listDomMedias = mediaModel.getListDOM();
+                 photographerProfile.appendChild(listDomMedias);
             
             });
             const listLightBox = document.querySelector(".list-lightBox");
@@ -62,10 +62,13 @@ fetch('data/photographers.json')
                 const listDomLightBox = lightBoxModel.getListDomLightBox();
                 listLightBox.appendChild(listDomLightBox);
             });
+            
             //Events lightBox media
             eventsLightBox();
+            
             //Events like medias
             eventsLikeMedias(medias);
+
             //Events media video
             const iconsPlayVideo = document.querySelectorAll(".icon-play-media");
             const videos = document.querySelectorAll(".video-media");
@@ -121,6 +124,10 @@ fetch('data/photographers.json')
 
 
             }));// pause video event
+
+            //Events sort medias
+            eventsSortMedias(medias);
+
             
         }
         async function init() { //get data form photographer and medias photographer

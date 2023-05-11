@@ -27,11 +27,17 @@
       <section id="section">
         <div class="container-dropdownList">
           <label for="dropdownList">Trier par</label>
-          <select id="dropdownList">
-            <option>Popularité</option>
-            <option>Date</option>
-            <option>Titre</option>
-          </select>
+          <!-- <select id="dropdownList">
+            <option value="likes">Popularité</option>
+            <option value="date">Date</option>
+            <option value="title">Titre</option>
+          </select> -->
+          <div class="dropdown-options">
+            <span id="likes">Popularité</span>
+            <span id="date">Date</span>
+            <span id="title">Titre</span>
+          </div>
+
         </div>
         <ul class="list-medias">
         </ul>
@@ -52,26 +58,26 @@
           </div>
         </header>
         <form name="form-modal" action="photographer.html?id=930" method="post">
-          
-            <div class="formData">
-              <label for="first">Prénom</label>
-              <input class="text-control" type="text" id="first" name="first"><br>
-            </div>
-            <div class="formData">
-              <label for="last">Nom</label>
-              <input class="text-control" type="text" id="last" name="last"><br>
-            </div>
-            <div class="formData">
-              <label for="email">Email</label>
-              <input class="text-control" type="text" id="email" name="email"><br>
-            </div>
-            <div class="formData">
-              <label for="your-message">Votre message</label>
-              <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message">
+
+          <div class="formData">
+            <label for="first">Prénom</label>
+            <input class="text-control" type="text" id="first" name="first"><br>
+          </div>
+          <div class="formData">
+            <label for="last">Nom</label>
+            <input class="text-control" type="text" id="last" name="last"><br>
+          </div>
+          <div class="formData">
+            <label for="email">Email</label>
+            <input class="text-control" type="text" id="email" name="email"><br>
+          </div>
+          <div class="formData">
+            <label for="your-message">Votre message</label>
+            <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message">
           </textarea><br>
-              <span id="count-character">500 caractères maximum</span>
-            </div>
-            <input class="contact_submit" type="submit" value="Envoyer">
+            <span id="count-character">500 caractères maximum</span>
+          </div>
+          <input class="contact_submit" type="submit" value="Envoyer">
         </form>
         <div class="modal-registration-validated">
           <p class="confirm-modal">Message envoyé !</p>
@@ -95,6 +101,7 @@
   <script src="scripts/utils/contactForm.js" defer></script>
   <script src="scripts/utils/lightBoxMedias.js" defer></script>
   <script src="scripts/utils/likeMedias.js" defer></script>
+  <script src="scripts/utils/sortMedias.js" defer></script>
 
 </body>
 

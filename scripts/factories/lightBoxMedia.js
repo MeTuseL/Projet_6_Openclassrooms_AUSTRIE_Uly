@@ -41,7 +41,7 @@ function lightBoxFactory(dataMedia,namePhotographer){
             flex_video_media_lbox.className = "flex-video-media";
 
 
-            div_lightBox_picture.appendChild(flex_video_media_lbox);
+            div_lightBox_picture.prepend(flex_video_media_lbox);
             flex_video_media_lbox.appendChild(img_playLightBox);
             flex_video_media_lbox.appendChild(mediaLightBox);
             mediaLightBox.appendChild(sourceVideoLightBox);
@@ -54,7 +54,7 @@ function lightBoxFactory(dataMedia,namePhotographer){
             mediaLightBox.setAttribute("src", picture);
             mediaLightBox.setAttribute("alt", 'Photo :' + title);
            
-            div_lightBox_picture.appendChild(mediaLightBox);
+            div_lightBox_picture.prepend(mediaLightBox);
     
         }
         
