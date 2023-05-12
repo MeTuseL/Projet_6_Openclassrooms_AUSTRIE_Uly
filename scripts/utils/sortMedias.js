@@ -1,174 +1,174 @@
 function eventsSortMedias(medias) {//Events sort medias
 
+    //DOM
+    const ulMedias = document.querySelector('.list-medias');
+    const listCardMedias = document.querySelectorAll(".card-media-photographer");
+    const dropdown = document.querySelector(".dropdown-options");
+    const optionsDropdown = document.querySelectorAll(".dropdown-options span");
+    const arrOptions = Array.from(optionsDropdown);
     const sortLikes = new Array();
     const sortDate = new Array();
     const sortTitle = new Array();
-    const byValue = (a, b) => a - b;
-
     for (let media of medias) {
         sortLikes.push(media["likes"]);
         sortDate.push(media["date"]);
         sortTitle.push(media["title"]);
     }
+    // sort the list of medias 
+    const byValue = (a, b) => a - b;
     sortLikes.sort(byValue);
     sortDate.sort();
     sortTitle.sort();
-    const ulMedias = document.querySelector('.list-medias');
-    const listCardMedias = document.querySelectorAll(".card-media-photographer");
-    const t = document.querySelector(".dropdown-options");
-    const r = document.querySelectorAll(".dropdown-options span");
-    const arr = Array.from(r);
 
-    r.forEach((option, index) => option.addEventListener("click", () => {
+    //Events
+    optionsDropdown.forEach((option, index) => option.addEventListener("click", () => {
 
-        if (t.childElementCount > 1) {
-            test2(index);
-            test(index);
-            t.style.setProperty("--rotateArrowDropdown", "rotate(-135deg)");
-            t.style.setProperty("--moveArrowDropdown", "22px");
+        if (dropdown.childElementCount > 1) {
+            displayMediasOfOptionSelected(index);
+            optionSelectedUpToFirst(index);
+            dropdown.style.setProperty("--rotateArrowDropdown", "rotate(-135deg)");
+            dropdown.style.setProperty("--moveArrowDropdown", "22px");
         }
         else {
-            test4(index);
-            t.style.setProperty("--rotateArrowDropdown", "rotate(45deg)");
-            t.style.setProperty("--moveArrowDropdown", "28px");
+            displayOptionsNotSelected(index);
+            dropdown.style.setProperty("--rotateArrowDropdown", "rotate(45deg)");
+            dropdown.style.setProperty("--moveArrowDropdown", "28px");
         }
-
-
-    }));
-    window.addEventListener("load", () => {
-
-        for (let p of r) {
-            if (t.firstChild.nextSibling.id !== p.id) {
-                t.removeChild(p);
-            }
-        }
-
-    });
-    window.addEventListener("load",test1);
+    }));//If  the list of options is not unfolded, display it. Otherwise, 
+    //displays the list of media of the selected option.
+    
     document.addEventListener("click", (e) => {
 
-        if (t.childElementCount > 1) {
-            if (e.target !== t.children[0]) {
+        if (dropdown.childElementCount > 1) {
+            if (e.target !== dropdown.children[0]) {
 
-                for (let x of r) {
-                    if (t.children[0] !== x) {
-                        t.removeChild(x);
+                for (let option of optionsDropdown) {
+                    if (dropdown.children[0] !== option) {
+                        dropdown.removeChild(option);
                     }
                     else {
-                        t.style.setProperty("--rotateArrowDropdown", "rotate(-135deg)");
-                        t.style.setProperty("--moveArrowDropdown", "22px");
-                        x.style.borderBottom = "1px solid transparent";
+                        dropdown.style.setProperty("--rotateArrowDropdown", "rotate(-135deg)");
+                        dropdown.style.setProperty("--moveArrowDropdown", "22px");
+                        option.style.borderBottom = "1px solid transparent";
                     }
                 }
             
             }
-            
 
+        }   
+    });//if the user clicks anywhere outside the select box, then close all select boxes
 
+    hideOptionsNotSelectedByDefault();//hide by default all options not selected and 
+    //display the list of medias of option selected
+
+    //Functions
+    function hideOptionsNotSelectedByDefault(){
+        for (let option of optionsDropdown) {
+            if (dropdown.children[0].id !== option.id) {
+                dropdown.removeChild(option);
+            }
         }
-
-
-    });/*if the user clicks anywhere outside the select box,
-    then close all select boxes:*/
-    function test2(n) {
-        if (r[n].id == "likes") {
+        displayMediasOfOptionSelectedByDefault();
+    }
+    function displayMediasOfOptionSelectedByDefault() {
+        if (dropdown.children[0].id == "likes") {
             for (let i = 0; i < sortLikes.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["likes"] == sortLikes[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["likes"] == sortLikes[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
                     }
                 }
             }
         }
-        if (r[n].id == "date") {
+        if (dropdown.children[0].id == "date") {
             for (let i = 0; i < sortDate.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["date"] == sortDate[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["date"] == sortDate[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
                     }
                 }
             }
         }
-        if (r[n].id == "title") {
+        if (dropdown.children[0].id == "title") {
             for (let i = 0; i < sortTitle.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["title"] == sortTitle[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["title"] == sortTitle[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
                     }
                 }
             }
         }
     }
-    function test1() {
-        if (t.children[0].id == "likes") {
-            for (let i = 0; i < sortLikes.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["likes"] == sortLikes[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
-                    }
-                }
-            }
-        }
-        if (t.children[0].id == "date") {
-            for (let i = 0; i < sortDate.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["date"] == sortDate[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
-                    }
-                }
-            }
-        }
-        if (t.children[0].id == "title") {
-            for (let i = 0; i < sortTitle.length; i++) {
-                for (let i2 = 0; i2 < medias.length; i2++) {
-                    if (medias[i2]["title"] == sortTitle[i]) {
-                        ulMedias.appendChild(listCardMedias[i2]);
-                    }
-                }
-            }
-        }
-    }
-    function test(n) {
+    function hideOptionsNotSelected(n) {
 
-        if (r[n].id == "likes") {
-            t.prepend(r[n]);
-            test3(n);
-        }
-        if (r[n].id == "date") {
-            t.prepend(r[n]);
-            test3(n);
-        }
-        if (r[n].id == "title") {
-            t.prepend(r[n]);
-            test3(n);
-        }
-    }
-    function test3(n) {
-
-        for (let sOptions of r) {
-            if (r[n].id !== sOptions.id) {
-                t.removeChild(sOptions);
+        for (let option of optionsDropdown) {
+            if (optionsDropdown[n].id !== option.id) {
+                dropdown.removeChild(option);
             }
             else {
-                sOptions.style.borderBottom = "1px solid transparent";
+                option.style.borderBottom = "1px solid transparent";
             }
         }
 
     }
-    function test4(n) {
-        for (let s of arr) {
-            if (r[n].id !== s.id) {
-                t.appendChild(s);
+    function displayMediasOfOptionSelected(n) {
+        if (optionsDropdown[n].id == "likes") {
+            for (let i = 0; i < sortLikes.length; i++) {
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["likes"] == sortLikes[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
+                    }
+                }
+            }
+        }
+        if (optionsDropdown[n].id == "date") {
+            for (let i = 0; i < sortDate.length; i++) {
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["date"] == sortDate[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
+                    }
+                }
+            }
+        }
+        if (optionsDropdown[n].id == "title") {
+            for (let i = 0; i < sortTitle.length; i++) {
+                for (let index = 0; index < medias.length; index++) {
+                    if (medias[index]["title"] == sortTitle[i]) {
+                        ulMedias.appendChild(listCardMedias[index]);
+                    }
+                }
+            }
+        }
+    }
+    function optionSelectedUpToFirst(n) {// the option selected go as first child of dropdown
+
+        if (optionsDropdown[n].id == "likes") {
+            dropdown.prepend(optionsDropdown[n]);
+            hideOptionsNotSelected(n);
+        }
+        if (optionsDropdown[n].id == "date") {
+            dropdown.prepend(optionsDropdown[n]);
+            hideOptionsNotSelected(n);
+        }
+        if (optionsDropdown[n].id == "title") {
+            dropdown.prepend(optionsDropdown[n]);
+            hideOptionsNotSelected(n);
+        }
+    }
+    function displayOptionsNotSelected(n) {
+        for (let option of arrOptions) {
+            if (optionsDropdown[n].id !== option.id) {
+                dropdown.appendChild(option);
             }
         }
 
-        for (let sOptions of r) {
+        for (let option of optionsDropdown) {
 
-            if (t.lastChild.id == sOptions.id) {
-                sOptions.style.borderBottom = "1px solid transparent";
+            if (dropdown.lastChild.id == option.id) {
+                option.style.borderBottom = "1px solid transparent";
             }
             else {
-                sOptions.style.borderBottom = "1px solid white";
+                option.style.borderBottom = "1px solid white";
             }
 
         }
