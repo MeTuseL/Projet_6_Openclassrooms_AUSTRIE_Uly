@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -14,29 +14,30 @@
     <header id="header">
       <div class="container-header">
         <a href="./index.html" aria-label="Retourner à la page d'accueil, cliquer">
-          <img src="./assets/images/logo.png" alt="Logo de Fisheye" class="logo" />
+          <img src="./assets/images/logo.png" alt="Logo de Fisheye" class="logo">
         </a>
       </div>
     </header>
     <main id="main">
-       <section id="section-header">
+      <header id="section-header">
         <div class="photograph-header">
           <button class="contact_button" aria-label="Contactez-moi, ouvrir">Contactez-moi</button>
         </div>
-       </section>
-      <section id="section">
+      </header>
+      <div id="section">
         <div class="container-dropdownList">
-          <label id="dropdown-optionsLabel" for="dropdown-options">Trier par</label>
+          <label id="dropdown-optionsLabel" aria-label="Menu delourant, développer pour trier les médias">Trier par</label>
           <!-- Select box -->
-          <div id="dropdown-options" role="menuitem" aria-labelledby="dropdown-optionsLabel" aria-label="Menu delourant, développer" tabindex="0">
-            <span id="likes" role="option" aria-labelledby="likes" tabindex="1">Popularité</span>
-            <span id="date" role="option" aria-labelledby="date" tabindex="1">Date</span>
-            <span id="title" role="option" aria-labelledby="title" tabindex="1">Titre</span>
+          <div id="dropdown-options" role="menubar" aria-labelledby="dropdown-optionsLabel"
+            tabindex="0">
+            <span id="likes" role="listbox" aria-labelledby="likes" tabindex="1">Popularité</span>
+            <span id="date" role="listbox" aria-labelledby="date" tabindex="1">Date</span>
+            <span id="title" role="listbox" aria-labelledby="title" tabindex="1">Titre</span>
           </div>
         </div>
         <ul class="list-medias">
         </ul>
-      </section>
+      </div>
     </main>
     <div class="container-price-popularity">
       <div class="popularity-photographer">
@@ -49,7 +50,8 @@
         <header id="header-contact">
           <h2 id="title-header-contact">Contactez-moi</h2>
           <div class="container-icon-close" tabindex="0">
-            <img class="icon-close" src="./assets/icons/close.svg" alt="Fermeture du formulaire" aria-label="Fermer le formulaire, cliquer" />
+            <img class="icon-close" src="./assets/icons/close.svg" alt="Fermeture du formulaire"
+              aria-label="Fermer le formulaire, cliquer">
           </div>
         </header>
         <form name="form-modal" action="photographer.html?id=930" method="post">
@@ -71,8 +73,8 @@
           </div>
           <div class="formData">
             <label id="your-messageLabel" for="your-message">Votre message</label>
-            <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message" 
-            aria-labelledby="your-messageLabel" aria-describedby="count-character">
+            <textarea class="text-control" spellcheck="false" id="your-message" name="your-message"
+              aria-labelledby="your-messageLabel" aria-describedby="count-character">
           </textarea><br>
             <span id="count-character">500 caractères maximum</span>
             <span class="alert-error-form" role="alert"></span>
@@ -87,9 +89,12 @@
     </div>
     <div class="background-modal" id="lightBox-medias">
       <div class="list-lightBox">
-        <img src="./assets/icons/angle-left-solid.svg" class="prev-media" aria-label="Precédent média, cliquer ou flèche de gauche" tabindex="0">
-        <img src="./assets/icons/angle-right-solid.svg" class="next-media" aria-label="Prochain média, cliquer ou flèche de droite" tabindex="0">
-        <img class="close-lightBox" src="./assets/icons/close.svg" aria-label="Fermer, cliquer" tabindex="0">
+        <img src="./assets/icons/angle-left-solid.svg" alt="Precédent média" class="prev-media"
+          aria-label="Precédent média, cliquer ou flèche de gauche" tabindex="0">
+        <img src="./assets/icons/angle-right-solid.svg" alt="Prochain média" class="next-media"
+          aria-label="Prochain média, cliquer ou flèche de droite" tabindex="0">
+        <img class="close-lightBox" src="./assets/icons/close.svg" alt="Fermeture de la lightbox"
+          aria-label="Fermer, cliquer" tabindex="0">
       </div>
     </div>
   </div>

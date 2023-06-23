@@ -60,7 +60,7 @@ for(let alert of alertErrorForm){
         alertErrorMsg = alert;
     }
 }
-console.log(alertErrorForm[0].parentElement.children[1].id)
+
 //Events modal
 contactBtn.addEventListener("click", displayModal);// btn display modal event
 closeForm.addEventListener("click", closeModal);// icon close modal event

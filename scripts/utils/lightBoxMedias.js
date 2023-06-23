@@ -42,7 +42,8 @@ function eventsLightBox() {// Events lightBox Media
         sortedListMediasPicture = document.querySelectorAll(".media-picture");
 
 
-    }));//open currant lightBox
+    }));//open current lightBox
+
     listTitleMedia.forEach((title, index) => title.addEventListener("click", () => {
         currentSlide(index);
         sortedListLightBoxMedias = document.querySelectorAll(".lightBox-media-picture");//get current sorted lightBox list
@@ -51,18 +52,18 @@ function eventsLightBox() {// Events lightBox Media
         sortedListMediasPicture = document.querySelectorAll(".media-picture");
 
     }));//open current lightBox
-    prevIconsLightBox.addEventListener("click", prevSlidesLightBox);// switch media event
-    window.addEventListener("keydown", (event) => {//accessibility keydown lightbox
+
+    window.addEventListener("keydown", (event) => {
         if (event.code === "ArrowLeft" &&
-            bgLightBoxModal.style.display == "block") {
+            bgLightBoxModal.style.display == "block") {//nav with arrowleft
             prevSlidesLightBox();
         }
         else if (event.code === "ArrowRight" &&
-            bgLightBoxModal.style.display == "block") {
+            bgLightBoxModal.style.display == "block") {//nav with arrowright
             nextSlidesLightBox();
         }
         else if (event.code === "Escape" &&
-            bgLightBoxModal.style.display == "block") {
+            bgLightBoxModal.style.display == "block") {//exit lightbox 
             closeLightBox();
             for (let lightBox of listLightBoxMedias) {
                 if (lightBox.style.display == "block") {
@@ -72,7 +73,12 @@ function eventsLightBox() {// Events lightBox Media
             }
 
         }
-        else if (event.code === "Enter" && bgLightBoxModal.style.display !== "block") {
+    });// switch or close lightBox on press keyboard
+
+    window.addEventListener("keydown", (event) => {
+
+        if (event.code === "Enter" && bgLightBoxModal.style.display !== "block") {
+            //accessibility open the lightbox with enter
             for (let mediaPicture of listMediasPicture) {
                 if (document.activeElement == mediaPicture) {
                     indexMediaPicture = arrListMediasPicture.indexOf(mediaPicture);
@@ -98,6 +104,7 @@ function eventsLightBox() {// Events lightBox Media
             }
         }
         else if (event.code === "Enter" && bgLightBoxModal.style.display == "block") {
+            //accessibility nav between lightbox medias when user press enter on icon 
             if (document.activeElement == prevIconsLightBox) {
                 prevSlidesLightBox();
                 prevMediaFocus();
@@ -128,7 +135,9 @@ function eventsLightBox() {// Events lightBox Media
             }
         }
 
-    });// switch or close lightBox on press keyboard
+    });//accessibility keydown lightbox
+
+    prevIconsLightBox.addEventListener("click", prevSlidesLightBox);// switch media event
     nextIconsLightBox.addEventListener("click", nextSlidesLightBox);// switch media event
 
     //Functions
@@ -244,7 +253,7 @@ function eventsLightBox() {// Events lightBox Media
             if (lightBox.style.display == "block") {
                 if (indexLightBox == 0) {
                     indexLightBox = (sortedListLightBoxMediasPicture.length - 1);
-                    
+
                     if (lightBox.children[0].className == "lightBox-image-media") {
                         sortedListLightBoxMediasPicture[indexLightBox].focus();
 
