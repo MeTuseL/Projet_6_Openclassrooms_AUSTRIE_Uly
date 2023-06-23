@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye</title>
   </head>
@@ -11,17 +11,17 @@
     <div class="container-body">
     <header>
       <div class="container-header">
-      <a href="index.html">
-        <img src="assets/images/logo.png" alt="Fisheye Home page" class="logo" />
+      <a href="./index.html" aria-label="Retourner à la page d'accueil, cliquer">
+        <img src="./assets/images/logo.png" alt="Logo de Fisheye" class="logo"/>
       </a>
-        <h1>Nos photographes</h1>
+        <h1 tabindex="0" aria-label="Mini profil des photographes">Nos photographes</h1>
       </div>
     </header>
-    <main id="main" aria-label="Liste des mini-profils des photographes">
+    <main id="main">
         <div class="photographer_section"></div>
     </main>
   </div>
-    <script src="scripts/factories/photographer.js" defer></script>
-    <script src="scripts/pages/index.js" defer></script>
+    <script src="./scripts/factories/photographer.js" defer></script>
+    <script src="./scripts/pages/index.js" defer></script>
   </body>
 </html>

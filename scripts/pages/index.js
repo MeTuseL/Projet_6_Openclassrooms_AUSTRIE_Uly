@@ -3,7 +3,7 @@ fetch('data/photographers.json')
     .then(data => {
         async function getPhotographers() {//return photographers list
             let listPhotographers = data["photographers"];
-            return ({ photographers: listPhotographers});
+            return ({ photographers: listPhotographers });
         }
         async function displayData(photographers) {// display data photographer
             const photographersSection = document.querySelector(".photographer_section");
@@ -17,10 +17,13 @@ fetch('data/photographers.json')
         async function init() { //get data from photographers
             const { photographers } = await getPhotographers();
             displayData(photographers);
-        }
+
+        //mettre displat content sur les Ul medias
+
+    }
         
         init();
     })
-    .catch(error => console.log(error));
+    .catch (error => console.log(error));
 
 

@@ -37,30 +37,30 @@ fetch('data/photographers.json')
         async function displayData(photographer) {//display data photographer
 
             //header data
-            const photographerProfile = document.getElementById("aside");
+            const photographerProfile = document.getElementById("section-header");
 
             const photographerModel = photographerFactory(photographer);
             const userCardDOM = photographerModel.getUserProfileDOM();
             photographerProfile.appendChild(userCardDOM);
 
-
-
         }
         async function displayMediasData(medias, namePhotographer) {// display data medias photographer
-            const photographerProfile = document.getElementById("section");
+            const photographerProfile2 = document.getElementById("section");
             //Media data 
             medias.forEach((media) => {
                  const mediaModel = mediaFactory(media, namePhotographer);
                  const listDomMedias = mediaModel.getListDOM();
-                 photographerProfile.appendChild(listDomMedias);
+                 photographerProfile2.appendChild(listDomMedias);
             
             });
             const listLightBox = document.querySelector(".list-lightBox");
+            const nextIconsLightBox = document.querySelector(".next-media");
             //lightbox data 
             medias.forEach((media) => {
                 const lightBoxModel = lightBoxFactory(media,namePhotographer);
                 const listDomLightBox = lightBoxModel.getListDomLightBox();
-                listLightBox.appendChild(listDomLightBox);
+                listLightBox.insertBefore(listDomLightBox,nextIconsLightBox);
+
             });
             
             //Events lightBox media
@@ -128,6 +128,7 @@ fetch('data/photographers.json')
             //Events sort medias
             eventsSortMedias(medias);
 
+            
             
         }
         async function init() { //get data form photographer and medias photographer

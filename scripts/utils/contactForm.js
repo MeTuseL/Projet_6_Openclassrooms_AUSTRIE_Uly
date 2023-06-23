@@ -1,6 +1,7 @@
 //DOM Modal
 const body = document.querySelector("body");
 const main = document.getElementById('main');
+const header = document.getElementById("header");
 const bgModal = document.getElementById("contact-modal");
 const modal = document.querySelector('form[name="form-modal"]');
 const contactBtn = document.querySelector(".contact_button");
@@ -40,7 +41,26 @@ let lastNameUser;
 let firstNameUser;
 let emailUser;
 let messageUser;
-
+const alertErrorForm = document.querySelectorAll(".alert-error-form");
+let alertErrorFirstN;
+let alertErrorLastN;
+let alertErrorEmail;
+let alertErrorMsg;
+for(let alert of alertErrorForm){
+    if (alert.parentElement.children[1].id == 'first') {
+        alertErrorFirstN = alert; 
+    }
+    if (alert.parentElement.children[1].id == 'last') {
+        alertErrorLastN = alert;
+    }
+    if (alert.parentElement.children[1].id == 'email') {
+        alertErrorEmail = alert;
+    }
+    if (alert.parentElement.children[1].id == 'your-message') {
+        alertErrorMsg = alert;
+    }
+}
+console.log(alertErrorForm[0].parentElement.children[1].id)
 //Events modal
 contactBtn.addEventListener("click", displayModal);// btn display modal event
 closeForm.addEventListener("click", closeModal);// icon close modal event
@@ -56,6 +76,13 @@ function displayModal() {// display modal
     body.style.overflow = "hidden";
     bgModal.style.display = "block";
     main.style.filter = "blur(2px)";
+    main.ariaHidden = "true";
+    header.ariaHidden = "true";
+    main.setAttribute("inert","");
+    header.setAttribute("inert","");
+    modal.ariaHidden = "false";
+    modal.focus();
+
 }
 function closeModal() {// close modal
     modal.reset();
@@ -69,6 +96,15 @@ function closeModal() {// close modal
     bgModal.style.display = "none";
     modalRegistValid.style.display = "none";
     main.style.filter = "blur(0)";
+    main.ariaHidden = "false";
+    header.ariaHidden = "false";
+    main.removeAttribute("inert");
+    header.removeAttribute("inert");
+    modal.ariaHidden = "true";
+    modal.blur();
+    contactBtn.focus();
+
+
 }
 function controlName(name) {// control name form
     return reName.test(name.value);
@@ -100,24 +136,32 @@ function validateFirstName(dataError) {// check value first name
     else if (firstName.value == "") {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorFirstN.innerHTML = "";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if (controlName(firstName) == false) {
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Le prénom doit contenir que des lettres.";
+        alertErrorFirstN.innerHTML = "Le prénom doit contenir que des lettres.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if (firstName.value.length < 3) {
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+        alertErrorFirstN.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorFirstN.innerHTML = "";
+        dataError.ariaInvalid = "false";
         dataError.dataset.correct = "true";
         resultEvent = "true";
         firstNameUser = firstName.value;
@@ -134,24 +178,32 @@ function validateLastName(dataError) {// check value last name
     else if (lastName.value == "") {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorLastN.innerHTML = "";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if (controlName(lastName) == false) {
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Le nom doit contenir que des lettres.";
+        alertErrorLastN.innerHTML = "Le nom doit contenir que des lettres.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if (lastName.value.length < 3) {
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+        alertErrorLastN.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorLastN.innerHTML = "";
+        dataError.ariaInvalid = "false";
         dataError.dataset.correct = "true";
         resultEvent = "true";
         lastNameUser = lastName.value;
@@ -168,12 +220,16 @@ function validateEmail(dataError) {// check value email
     else if (email.value == "") {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorEmail.innerHTML = "";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if (controlEmail(email) == false) {
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Email non valide.";
+        alertErrorEmail.innerHTML = "Email non valide.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
 
@@ -181,6 +237,8 @@ function validateEmail(dataError) {// check value email
     else {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorEmail.innerHTML = "";
+        dataError.ariaInvalid = "false";
         dataError.dataset.correct = "true";
         resultEvent = "true";
         emailUser = email.value;
@@ -197,18 +255,24 @@ function validateMsg(dataError) { // check value message
     else if (message.value == "") {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorMsg.innerHTML = "";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else if(message.value.length < 20){
         dataError.dataset.errorVisible = "true";
         dataError.dataset.error = "Veuillez entrer 20 caractères ou plus pour votre message.";
+        alertErrorMsg.innerHTML = "Veuillez entrer 20 caractères ou plus pour votre message.";
+        dataError.ariaInvalid = "true";
         dataError.dataset.correct = "false";
         resultEvent = "false";
     }
     else {
         dataError.dataset.errorVisible = "false";
         dataError.dataset.error = "";
+        alertErrorMsg.innerHTML = "";
+        dataError.ariaInvalid = "false";
         dataError.dataset.correct = "true";
         resultEvent = "true";
         messageUser = message.value;
@@ -220,20 +284,27 @@ function emptyFieldsModal() {// check value empty
     if (firstName.value == "") {
         dataErrorFirstN.dataset.errorVisible = "true";
         dataErrorFirstN.dataset.error = "Champ vide.";
+        alertErrorFirstN.innerHTML = "Champ vide.";
+        dataErrorFirstN.ariaInvalid = "true";
     }
     if (lastName.value == "") {
         dataErrorLastN.dataset.errorVisible = "true";
         dataErrorLastN.dataset.error = "Champ vide.";
+        alertErrorLastN.innerHTML = "Champ vide.";
+        dataErrorLastN.ariaInvalid = "true";
     }
     if (email.value == "") {
         dataErrorEmail.dataset.errorVisible = "true";
         dataErrorEmail.dataset.error = "Champ vide.";
+        alertErrorEmail.innerHTML = "Champ vide.";
+        dataErrorEmail.ariaInvalid = "true";
     }
     
     if(message.value == "" || message.value.length == 0){
         dataErrorMsg.dataset.errorVisible = "true";
         dataErrorMsg.dataset.error = "Champ vide.";
-
+        alertErrorMsg.innerHTML = "Champ vide.";
+        dataErrorMsg.ariaInvalid = "true";
 }
 }
 function validateValues() {// check values form

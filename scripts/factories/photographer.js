@@ -1,20 +1,19 @@
 function photographerFactory(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
-    const picture = `assets/photographers/${portrait}`;
-    const pagePhotographer = `photographer.html?id=${id}`;
+    const picture = `./assets/photographers/${portrait}`;
+    const pagePhotographer = `./photographer.html?id=${id}`;
 
     function getUserCardDOM() {// user card info Homepage
         // article
         const article = document.createElement('article');
-        article.ariaLabel = 'Mini-profil du photographe ' + name;
         // link
         const a = document.createElement('a');
         a.setAttribute("href", pagePhotographer);
-        a.ariaLabel = "Lien vers le profil de " + name;
+        a.ariaLabel = 'Accéder au profil de '+name;
         // picture photographer
         const div_img = document.createElement('div');
         div_img.className = "image-photographer";
-        div_img.ariaLabel = 'Photo de ' + name;
+        // div_img.ariaLabel = 'Photo de ' + name;
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         img.setAttribute("alt", 'Photo de ' + name)
@@ -50,18 +49,28 @@ function photographerFactory(data) {
         //description photographer
         const div_description = document.createElement("div");
         div_description.className = "container-description";
+        div_description.role = "dialog";
+        div_description.ariaLabel = "La description du photographe";
+        div_description.tabIndex = "0";
         const h2 = document.createElement('h2');
+        h2.role = "dialg";
+        h2.ariaLabel = "Le nom et prénom, "+name;
         h2.textContent = name;
         const p_1 = document.createElement('p');
         p_1.className = "description-photographer-1";
+        p_1.role = "dialog";
+        p_1.ariaLabel = "La ville et Pays, "+city+ ', ' + country;
         p_1.textContent = city + ', ' + country;
         const p_2 = document.createElement('p');
         p_2.className = "description-photographer-2";
+        p_2.role = "dialog";
+        p_2.ariaLabel = "Le slogan, "+tagline;
         p_2.textContent = tagline;
         //picture photographer 
         const div_img = document.createElement('div');
         div_img.className = "image-photographer";
         div_img.ariaLabel = 'Photo de ' + name;
+        div_img.tabIndex = "0";
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         img.setAttribute("alt", 'Photo de ' + name)

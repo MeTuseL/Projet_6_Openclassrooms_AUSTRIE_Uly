@@ -2,42 +2,37 @@
 <html>
 
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <title>Fisheye - photographe </title>
 </head>
 
 <body>
   <div class="container-body">
-    <header>
+    <header id="header">
       <div class="container-header">
-        <a href="index.html">
-          <img src="assets/images/logo.png" alt="Fisheye Home page" class="logo" />
+        <a href="./index.html" aria-label="Retourner à la page d'accueil, cliquer">
+          <img src="./assets/images/logo.png" alt="Logo de Fisheye" class="logo" />
         </a>
       </div>
     </header>
     <main id="main">
-      <aside id="aside">
+       <section id="section-header">
         <div class="photograph-header">
           <button class="contact_button" aria-label="Contactez-moi, ouvrir">Contactez-moi</button>
         </div>
-      </aside>
+       </section>
       <section id="section">
         <div class="container-dropdownList">
-          <label for="dropdownList">Trier par</label>
-          <!-- <select id="dropdownList">
-            <option value="likes">Popularité</option>
-            <option value="date">Date</option>
-            <option value="title">Titre</option>
-          </select> -->
-          <div class="dropdown-options">
-            <span id="likes">Popularité</span>
-            <span id="date">Date</span>
-            <span id="title">Titre</span>
+          <label id="dropdown-optionsLabel" for="dropdown-options">Trier par</label>
+          <!-- Select box -->
+          <div id="dropdown-options" role="menuitem" aria-labelledby="dropdown-optionsLabel" aria-label="Menu delourant, développer" tabindex="0">
+            <span id="likes" role="option" aria-labelledby="likes" tabindex="1">Popularité</span>
+            <span id="date" role="option" aria-labelledby="date" tabindex="1">Date</span>
+            <span id="title" role="option" aria-labelledby="title" tabindex="1">Titre</span>
           </div>
-
         </div>
         <ul class="list-medias">
         </ul>
@@ -46,62 +41,67 @@
     <div class="container-price-popularity">
       <div class="popularity-photographer">
         <span class="total-like-photographer"></span>
-        <img src="assets/icons/heart-solid.svg" alt="J'aime">
+        <img src="./assets/icons/heart-solid.svg" alt="J'aime">
       </div>
     </div>
     <div class="background-modal" id="contact-modal">
-      <div class="modal">
+      <div class="modal" role="group" aria-labelledby="title-header-contact">
         <header id="header-contact">
-          <h2>Contactez-moi</h2>
-          <div class="container-icon-close">
-            <img class="icon-close" src="assets/icons/close.svg" aria-label="Fermer" />
+          <h2 id="title-header-contact">Contactez-moi</h2>
+          <div class="container-icon-close" tabindex="0">
+            <img class="icon-close" src="./assets/icons/close.svg" alt="Fermeture du formulaire" aria-label="Fermer le formulaire, cliquer" />
           </div>
         </header>
         <form name="form-modal" action="photographer.html?id=930" method="post">
 
           <div class="formData">
-            <label for="first">Prénom</label>
-            <input class="text-control" type="text" id="first" name="first"><br>
+            <label id="firstLabel" for="first">Prénom</label>
+            <input class="text-control" type="text" id="first" name="first" aria-labelledby="firstLabel"><br>
+            <span class="alert-error-form" role="alert"></span>
           </div>
           <div class="formData">
-            <label for="last">Nom</label>
-            <input class="text-control" type="text" id="last" name="last"><br>
+            <label id="lastLabel" for="last">Nom</label>
+            <input class="text-control" type="text" id="last" name="last" aria-labelledby="lastLabel"><br>
+            <span class="alert-error-form" role="alert"></span>
           </div>
           <div class="formData">
-            <label for="email">Email</label>
-            <input class="text-control" type="text" id="email" name="email"><br>
+            <label id="emailLabel" for="email">Email</label>
+            <input class="text-control" type="text" id="email" name="email" aria-labelledby="emailLabel"><br>
+            <span class="alert-error-form" role="alert"></span>
           </div>
           <div class="formData">
-            <label for="your-message">Votre message</label>
-            <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message">
+            <label id="your-messageLabel" for="your-message">Votre message</label>
+            <textarea class="text-control" spellcheck="false" type="text" id="your-message" name="your-message" 
+            aria-labelledby="your-messageLabel" aria-describedby="count-character">
           </textarea><br>
             <span id="count-character">500 caractères maximum</span>
+            <span class="alert-error-form" role="alert"></span>
           </div>
-          <input class="contact_submit" type="submit" value="Envoyer">
+          <input class="contact_submit" type="submit" value="Envoyer" aria-label="Valider le formulaire, cliquer">
         </form>
-        <div class="modal-registration-validated">
-          <p class="confirm-modal">Message envoyé !</p>
-          <button class="contact_button btn-close">Fermer</button>
+        <div class="modal-registration-validated" role="group" aria-describedby="confirm-modal">
+          <p id="confirm-modal">Message envoyé !</p>
+          <button class="contact_button btn-close" aria-label="Fermer le formulaire, cliquer">Fermer</button>
         </div>
       </div>
     </div>
     <div class="background-modal" id="lightBox-medias">
       <div class="list-lightBox">
-        <img src="assets/icons/angle-left-solid.svg" class="prev-media" aria-label="Precédent média">
-        <img src="assets/icons/angle-right-solid.svg" class="next-media" aria-label="Prochain média">
-        <img class="close-lightBox" src="assets/icons/close.svg" aria-label="Fermer">
+        <img src="./assets/icons/angle-left-solid.svg" class="prev-media" aria-label="Precédent média, cliquer ou flèche de gauche" tabindex="0">
+        <img src="./assets/icons/angle-right-solid.svg" class="next-media" aria-label="Prochain média, cliquer ou flèche de droite" tabindex="0">
+        <img class="close-lightBox" src="./assets/icons/close.svg" aria-label="Fermer, cliquer" tabindex="0">
       </div>
     </div>
   </div>
-  <script src="scripts/factories/lightBoxMedia.js" defer></script>
-  <script src="scripts/factories/photographer.js" defer></script>
-  <script src="scripts/factories/media.js" defer></script>
-  <script src="scripts/factories/infosUserForm.js" defer></script>
-  <script src="scripts/pages/photographer.js" defer></script>
-  <script src="scripts/utils/contactForm.js" defer></script>
-  <script src="scripts/utils/lightBoxMedias.js" defer></script>
-  <script src="scripts/utils/likeMedias.js" defer></script>
-  <script src="scripts/utils/sortMedias.js" defer></script>
+  <script src="./scripts/factories/lightBoxMedia.js"></script>
+  <script src="./scripts/factories/photographer.js"></script>
+  <script src="./scripts/factories/media.js"></script>
+  <script src="./scripts/factories/infosUserForm.js"></script>
+  <script src="./scripts/utils/contactForm.js"></script>
+  <script src="./scripts/utils/lightBoxMedias.js"></script>
+  <script src="./scripts/utils/likeMedias.js"></script>
+  <script src="./scripts/utils/sortMedias.js"></script>
+  <script src="./scripts/pages/photographer.js"></script>
 
 </body>
 

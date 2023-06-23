@@ -252,8 +252,10 @@ li {
 
 .contact_button:hover,
 .contact_button:active,
+.contact_button:focus-visible,
 .contact_submit:hover,
-.contact_submit:active {
+.contact_submit:active,
+.contact_submit:focus-visible {
     background-color: #DB8876;
     color: black;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -407,7 +409,7 @@ form[name="form-modal"] #your-message {
 
 }
 
-.confirm-modal {
+#confirm-modal {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -428,6 +430,18 @@ form[name="form-modal"] .contact_submit {
 }
 
 /* data error message */
+
+ .alert-error-form {/* Visually hide an element, but leave it available for screen readers */
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
 .formData[data-error]::after {
     position: absolute;
     right: 0;
@@ -539,7 +553,7 @@ form[name="form-modal"] .contact_submit {
 
 /* dropdown */
 
-.dropdown-options {
+#dropdown-options {
     position: absolute;
     left: 100px;
     top: 0;
@@ -555,7 +569,7 @@ form[name="form-modal"] .contact_submit {
     border-radius: 5px;
 }
 
-.dropdown-options::after {
+#dropdown-options::after {
     position: absolute;
     content: "";
     border-top: 2px solid white;
@@ -566,10 +580,9 @@ form[name="form-modal"] .contact_submit {
     width: 8px;
     height: 8px;
     left: 125px;
-    cursor: pointer;
 }
 
-.dropdown-options span {
+#dropdown-options span {
 
     padding: 15px;
     cursor: pointer;
@@ -578,14 +591,13 @@ form[name="form-modal"] .contact_submit {
     color: white;
     width: 140px;
     border-bottom: 1px solid white;
-
 }
 
-.dropdown-options span:last-child {
+#dropdown-options span:last-child {
     border-bottom: 1px solid transparent;
 
 }
 
-.dropdown-options span:hover {
+#dropdown-options span:hover {
     background-color: #D3573C;
 }
